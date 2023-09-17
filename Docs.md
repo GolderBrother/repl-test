@@ -1,8 +1,10 @@
+# nest repl 模式
+
 我们写过很多 Module、Service、Controller，但这些都要服务跑起来之后在浏览器里访问对应的 url，通过 get 或者 post 的方式传参来测试。
 
-这个还是挺麻烦的，能不能像 node 的 repl 那样，直接在控制台测试呢？
+这个还是挺麻烦的，能不能像 node 的 `repl` 那样，直接在控制台测试呢？
 
-repl 是 read-eval-paint-loop，也就是这个：
+`repl` 是 `read-eval-paint-loop`，主要是用来调试 `service` 多一些，有点类似内嵌在终端里面的接口客户端，也就是这个：
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/014ac7622cb0491e9c0a048074987abd~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=566&h=482&s=20506&e=webp&b=010101)
 
@@ -12,9 +14,7 @@ Nest 能不能这样来测试呢？
 
 我们创建个 Nest 项目：
 
-```
-arduino
-复制代码
+```bash
 nest new repl-test
 ```
 
@@ -26,9 +26,7 @@ nest new repl-test
 
 把服务跑起来：
 
-```
-arduino
-复制代码
+```bash
 npm run start:dev
 ```
 
@@ -46,9 +44,7 @@ npm run start:dev
 
 在 src 下创建个 repl.ts，写入如下内容：
 
-```
-javascript
-复制代码
+```javascript
 import { repl } from '@nestjs/core';
 import { AppModule } from './app.module';
 
@@ -60,9 +56,7 @@ bootstrap();
 
 然后把服务停掉，通过这种方式跑：
 
-```
-sql
-复制代码
+```bash
 npm run start:dev -- --entryFile repl
 ```
 
@@ -76,9 +70,7 @@ npm run start:dev -- --entryFile repl
 
 当然，你直接执行 nest start 也可以：
 
-```
-css
-复制代码
+```css
 nest start --watch --entryFile repl
 ```
 
@@ -104,17 +96,13 @@ get、post 方法都可以调用。
 
 安装校验相关的包：
 
-```
-arduino
-复制代码
+```bash
 npm install class-validator class-transformer
 ```
 
 在 dto 添加约束：
 
-```
-javascript
-复制代码
+```javascript
 import { IsEmail, IsNotEmpty } from "class-validator";
 
 export class CreateAaaDto {
@@ -128,9 +116,7 @@ export class CreateAaaDto {
 
 我们先正常跑下服务：
 
-```
-arduino
-复制代码
+```bash
 npm run start:dev
 ```
 
@@ -144,9 +130,7 @@ npm run start:dev
 
 我们再跑下 repl 模式：
 
-```
-sql
-复制代码
+```bash
 npm run start:dev -- --entryFile repl
 ```
 
@@ -196,9 +180,7 @@ get() 或者 $() 可以拿到某个 controller 或者 provider 调用它的方�
 
 可以改一下 repl.ts：
 
-```
-javascript
-复制代码
+```javascript
 import { repl } from '@nestjs/core';
 import { AppModule } from './app.module';
 
@@ -221,13 +203,11 @@ bootstrap();
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9fda1a3a30a24dd48ad05428a0b94854~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=482&h=272&s=11414&e=webp&b=202020)
 
-你还可以把这个命令配到 npm scripts 里：
+你还可以把这个命令配到 `npm scripts` 里：
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a422498fc74346248eb77103b21870a4~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=924&h=114&s=13534&e=webp&b=212020)
 
-然后直接 npm run repl:dev 来跑。
-
-案例代码上传了[小册仓库](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2FQuarkGluonPlasma%2Fnestjs-course-code%2Ftree%2Fmain%2Frepl-login "https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/repl-login")。
+然后直接 `npm run repl:dev` 来跑。
 
 ## 总结
 
